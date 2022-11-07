@@ -1,5 +1,9 @@
-## <span style="color:yellow">Dacon_Nerdiness</span>
+# DACON_Nerdiness
+
+## EDA ✏
 
 
-<span style="color:yello">노란 글씨입니다.</span>
+
+## MODEL ✏
+
 
