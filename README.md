@@ -73,4 +73,10 @@ test = test.drop(test[test.age < 4].index)
 
 ## MODEL ✏
 
+1. Model 1: LGBM Esemble
+
+서로 다른 LGBM 4개를 학습시키고 Soft_voting 방법으로 앙상블 하였습니다.
+
+2. Model 2: ExtraTrees Regressor
+
 
