@@ -4,7 +4,7 @@
 
 ## EDA ✏
 
-칼럼 설명
+✔칼럼 설명
 - Q1~Q26: 질문
     - 대답: 1 ~ 5
 - country: 응답자의 국적
@@ -22,7 +22,7 @@
 - age: 나이
 - hand: 왼손잡이 or 오른손잡이
 - religion: 종교
-- orientation: 지남력 (현재 자신이 놓여 있는 상황을 올바르게 인식하는 능력) https://www.amc.seoul.kr/asan/healthinfo/easymediterm/easyMediTermDetail.do?dictId=3798
+- orientation: 성향 
 - voted: 투표에 참여한 횟수
 - married: 결혼한 횟수
 - familisize: 가족 구성원 수
@@ -30,8 +30,46 @@
 - nerdiness: *타겟변수, nerdiness 정량화하는 프로젝트, nerd인지 아닌지
 https://educalingo.com/ko/dic-en/nerdiness
 
-# 
+✔설문 문항 별 상관관계 분석
 
+- e.g) Questions 상관분석
+
+
+![image](https://user-images.githubusercontent.com/74172467/201461649-7f1de40d-92f2-4212-bb0a-0b968e0a0fb0.png)
+
+✔결측치 처리 
+
+- e.g) Questions의 결측치 채우기
+~~~
+from sklearn.impute import KNNImputer
+
+def knull(col):
+    imputer = KNNImputer(n_neighbors=3)
+    a = imputer.fit_transform(train[col])
+    x_train[col] = a
+
+#knull(col) : null값을 knn을 사용하여 채워줍니다.
+#여기서 주의 하실점이 있어요. col이 2차원이여야만 knn이 가능합니다. 그래서 Q나 TIPI에만 사용할 수 있어요
+# 아니면 결측치를 채우고 싶은 col과 다른 col들을 묶어서 넣어주어도 가능합니다. 물론 이상치 제거가 우선되야겠죠?
+
+knull(Answers)
+~~~
+
+✔이상치 제거 
+
+- e.g) age 이상치 제거
+
+![image](https://user-images.githubusercontent.com/74172467/201464834-85ac2053-f49b-43df-a15c-e7cb79976a8c.png)
+~~~
+x_train = x_train.drop(x_train[x_train.age > 120].index)
+x_train = x_train.drop(x_train[x_train.age < 4].index)
+
+y_train = x_train.drop(x_train[x_train.age > 120].index)
+y_train = x_train.drop(x_train[x_train.age < 4].index)
+
+test = test.drop(test[test.age > 120].index)
+test = test.drop(test[test.age < 4].index)
+~~~
 
 ## MODEL ✏
 
