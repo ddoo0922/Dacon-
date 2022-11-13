@@ -88,3 +88,18 @@ test = test.drop(test[test.age < 4].index)
 
 💫AutoML_Pycaret💫
 
+AUC 점수가 가장 높게 측정된 모델 Best3입니다.
+|모델명|AUC|
+|:---|---:|
+|GBC(Gradient Boosting Classifier)| 0.7655|
+|lightgbm(Light Gradient Boosting Machine) |0.7655|
+|lda(Linear Discriminant Analysis) |0.7637|	
+
+이 중 가장 높게 나온 GBC를 선택하였고
+tunning, ensemble(Boosting), blend 과정을 거쳐 0.841 AUC를 얻었습니다.
+
+~~~
+gbc_auto = tune_model(gbc, choose_better = True)
+ens_gbc_boost = ensemble_model(gbc, method = "Boosting", fold = 5)
+blender = blend_models(best3, fold = 5)
+~~~
